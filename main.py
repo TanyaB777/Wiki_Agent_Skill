@@ -1,5 +1,5 @@
 import logging
-from scripts.client import WikipediaTrendAnalyzer
+from scripts.client import WikipediaTrendAnalyzer, find_wikipedia_candidates
 from scripts.reporting import generate_pdf_report
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -16,16 +16,24 @@ def main():
     #     source_lang="en",
     # )
 
-    result = analyzer.analyze_trends_by_keywords(
-        query="ai",
+    selected_title = "Python"
+
+    candidates = find_wikipedia_candidates(selected_title, lang="en", limit=3)
+    print(candidates)
+    selected_title = candidates[0]["title"]
+
+    result = analyzer.analyze_trends_by_title(
+        source_title=selected_title,
         target_languages=["pl", "de", "uk"],
-        start_date="2024-01-01",
+        start_date="2026-08-01",
         end_date="2026-09-24",
-        source_lang="en",
+        normalize=True,
+        source_lang="en"
     )
 
-    generate_pdf_report(result)
+    result['query'] = selected_title
 
+    generate_pdf_report(result, "assets/wikipedia_trend_report.pdf")
 
 if __name__ == "__main__":
     main()
