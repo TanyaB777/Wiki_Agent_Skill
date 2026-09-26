@@ -113,6 +113,7 @@ def _generate_trend_chart(report_data: Dict[str, Any], output_path: Optional[str
 
 
 def generate_pdf_report(
+        query: str,
         trend_results: Dict[str, Any],
         file_path: str = "assets/wikipedia_trend_report.pdf"
 ) -> None:
@@ -159,8 +160,7 @@ def generate_pdf_report(
     )
 
     # 1. Header & Metadata
-    query_name = trend_results.get('query', 'N/A')
-    story.append(Paragraph(f"Wikipedia Trend Report: {query_name.upper()}", title_style))
+    story.append(Paragraph(f"Wikipedia Trend Report: {query.upper()}", title_style))
 
     start_date = trend_results.get('start_date', '')
     end_date = trend_results.get('end_date', '')

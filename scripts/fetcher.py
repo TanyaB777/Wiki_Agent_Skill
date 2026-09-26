@@ -9,11 +9,6 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_USER_AGENT = "WikipediaTrendAnalyzerBot/1.0 (https://example.org/bot; bot@example.org)"
 
-
-# =====================================================================
-# 1. SEPARATE TOOL FOR LLM / AGENT (CANDIDATE SEARCH)
-# =====================================================================
-
 def find_wikipedia_candidates(
         query: str,
         lang: str = "en",
