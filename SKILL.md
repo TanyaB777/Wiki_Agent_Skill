@@ -63,11 +63,10 @@ Store the resolved tuple (lang, exact_title) to pass cleanly into the data fetch
   - Parse relative date mentions (e.g., "for the last two years" → calculate `start_date` as 24 months prior to current date, `end_date` as today/current month).
   - Use format `YYYY-MM-DD`.
   - **Missing Timeframe Clarification:** If the timeframe/period is completely missing from the user's prompt and cannot be inferred, ask the user to clarify the desired analysis period before proceeding, or suggest standard presets (e.g., last 6, 12, or 24 months).
-  - **Date Resolution:** Always retrieve the current date dynamically via the runtime environment/Python execution (`datetime.now()`). Do not rely on LLM training cutoff dates.
-  - *Default:* If unspecified, default to the last 24 months.
+  - **Date Resolution:** Always determine the current date dynamically at execution time. Never rely on hardcoded dates.
   - Never hardcode dates from examples. Always evaluate end_date as the current date ($T$) and start_date as $T - \text{requested timeframe}$ (default: $T - 24\ \text{months}$).
 * **Normalization Mode (`normalize`):**
-  - **`normalize=True` (PPM - Parts Per Million):** MUST be set when comparing two or more different language sections (e.g., Polish vs. Czech) to account for differences in total Wikipedia traffic and population size.
+  - **`normalize=True` (PPM - Parts Per Million):** MUST be set when comparing two or more different language sections (e.g., Polish vs. Czech) to reduce the effect of differences in the absolute size of Wikipedia language sections.
   - **`normalize=False` (Raw Pageviews):** Use ONLY when analyzing absolute demand within a single language section.
 
 ```python
@@ -88,7 +87,7 @@ result = analyzer.analyze_trends_by_title(
 
 3. Output Requirements
 The analysis result must include:
-Raw and Normalized Metrics: Total views, average monthly views, and growth rates (YoY / Trend % change).
+Raw and Normalized Metrics: Total views, average monthly views, and growth rates.
 
 Note: Target language page titles are automatically resolved via Wikipedia's langlinks API for source_title.
 
