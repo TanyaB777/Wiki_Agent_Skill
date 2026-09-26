@@ -1,7 +1,7 @@
-import logging
 from scripts.fetcher import WikipediaTrendAnalyzer, find_wikipedia_candidates
 from scripts.report import generate_pdf_report
 
+import logging
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 
@@ -10,9 +10,11 @@ def main():
 
     query = "Python"
 
-    candidates = find_wikipedia_candidates(query, lang="en", limit=3)
+    # Step 1: Find Wikipedia candidates
+    candidates = find_wikipedia_candidates(query, lang="en", limit=5)
     selected_title = candidates[0]["title"]
 
+    # Step 2: Analyze pageviews
     result = analyzer.analyze_trends_by_title(
         source_title=selected_title,
         target_languages=["pl", "de", "uk"],
@@ -22,7 +24,8 @@ def main():
         source_lang="en"
     )
 
-    generate_pdf_report(query, result, "assets/wikipedia_trend_report.pdf")
+    # Step 3: Generate PDF report
+    generate_pdf_report(query, result)
 
 if __name__ == "__main__":
     main()

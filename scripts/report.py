@@ -114,10 +114,10 @@ def _generate_trend_chart(report_data: Dict[str, Any], output_path: Optional[str
 
 def generate_pdf_report(
         query: str,
-        trend_results: Dict[str, Any],
-        file_path: str = "assets/wikipedia_trend_report.pdf"
+        trend_results: Dict[str, Any]
 ) -> None:
     """Generates an aesthetic business PDF report."""
+    file_path: str = "assets/wikipedia_trend_report.pdf"
     font_name = _register_cyrillic_font()
 
     dir_name = os.path.dirname(file_path)
