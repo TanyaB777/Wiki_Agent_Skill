@@ -38,14 +38,14 @@ candidates = find_wikipedia_candidates(
 ```
 
 3. Title Resolution & Decision Logic
-Single Clear Match: If the top result accurately matches the intended topic, select its exact canonical title and proceed to Step 2.
+Single Clear Match: If the top candidate's title and `snippet` clearly describe the intended topic without ambiguity, select its exact canonical title and proceed to Step 2.
 
 Ambiguous Matches: If multiple relevant candidates exist or the query hits a disambiguation page, list the top candidate titles/snippets and ask the user to select the correct one.
 
 No Results Found: If no candidates are returned, suggest alternative keywords or ask the user to refine the topic.
 
 4. Output Parameters
-Store the resolved tuple (lang, exact_title) to pass cleanly into the data fetching phase (Step 2).
+Store the tuple (lang, exact_title) to pass cleanly into the data fetching phase (Step 2).
 
 ### Step 2: Historical Pageview & Trend Analysis
 
