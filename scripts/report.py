@@ -15,7 +15,7 @@ from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-from scripts.analysis import export_to_summary_dataframe, export_to_dataframe
+from scripts.analysis import export_to_summary_dataframe
 
 logger = logging.getLogger(__name__)
 
