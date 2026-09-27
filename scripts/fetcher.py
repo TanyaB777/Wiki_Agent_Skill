@@ -7,20 +7,19 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_USER_AGENT = "WikipediaTrendAnalyzerBot/1.0 (https://example.org/bot; bot@example.org)"
+DEFAULT_USER_AGENT = ("WikipediaTrendAnalyzerBot/1.0 (https://github.com/TanyaB777/Wiki_Agent_Skill)")
 
 def find_wikipedia_candidates(
         query: str,
         lang: str = "en",
-        limit: int = 5,
-        user_agent: str = DEFAULT_USER_AGENT
+        limit: int = 5
 ) -> List[Dict[str, str]]:
     """
     Standalone function to search for candidate Wikipedia articles.
     Returns article titles and text snippets for selection by the Agent.
     """
     url = f"https://{lang}.wikipedia.org/w/api.php"
-    headers = {"User-Agent": user_agent}
+    headers = {"User-Agent": DEFAULT_USER_AGENT}
     params = {
         "action": "query",
         "list": "search",
@@ -60,9 +59,9 @@ class WikipediaTrendAnalyzer:
     Class for analyzing Wikipedia article pageviews with optional normalization support (PPM).
     """
 
-    def __init__(self, user_agent: Optional[str] = None):
+    def __init__(self):
         self.headers = {
-            "User-Agent": user_agent or DEFAULT_USER_AGENT
+            "User-Agent": DEFAULT_USER_AGENT
         }
 
     def _parse_date(self, date_str: str) -> datetime:
@@ -264,7 +263,7 @@ class WikipediaTrendAnalyzer:
             start_date: str,
             end_date: str,
             source_lang: str = "en",
-            normalize: bool = False  # <--- PARAMETER PASSED HERE
+            normalize: bool = False
     ) -> Dict[str, Any]:
         """
         Main entry point for trend analysis.

@@ -15,4 +15,3 @@
 
 ## 3. Business Limitations (B2C Context)
 * Wikipedia pageviews indicate **informational curiosity**, not immediate **commercial willingness-to-pay**.
-* External events (news, viral social media trends) cause temporary traffic spikes that should not be confused with long-term baseline growth.
